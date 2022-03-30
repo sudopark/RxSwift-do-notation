@@ -36,5 +36,23 @@ extension ObservableType {
         
         return self.flatMap(runExpression)
     }
+    
+    
+    public func flatMap<T, S: AsyncSequence>(do expression: @escaping (Element) -> S) -> Observable<T> where S.Element == T {
+        
+        return self.flatMap { expression($0).asObservable() }
+    }
+    
+    
+    public func flatMapFirst<T, S: AsyncSequence>(do expression: @escaping (Element) -> S) -> Observable<T> where S.Element == T {
+        
+        return self.flatMapFirst { expression($0).asObservable() }
+    }
+    
+    
+    public func flatMapLatest<T, S: AsyncSequence>(do expression: @escaping (Element) -> S) -> Observable<T> where S.Element == T {
+        
+        return self.flatMapLatest { expression($0).asObservable() }
+    }
 }
 
