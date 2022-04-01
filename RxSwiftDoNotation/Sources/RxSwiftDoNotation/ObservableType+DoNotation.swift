@@ -38,7 +38,7 @@ extension ObservableType {
     }
     
     
-    public func flatMap<T, S: AsyncSequence>(do expression: @escaping (Element) -> S) -> Observable<T> where S.Element == T {
+    public func flatMap<Source: AsyncSequence>(do expression: @escaping (Element) -> Source) -> Observable<Source.Element> {
         
         return self.flatMap { expression($0).asObservable() }
     }

@@ -16,9 +16,9 @@ import RxSwiftDoNotation
 
 class ObservableDoNotationTests: BaseTestsCase {
     
-    func testObservableDoNotation_flattenExpression() {
+    func testObservableDoNotation_addAsyncIncreasedInts() {
         // given
-        let expect = expectation(description: "should onNext event occur from flattened expression")
+        let expect = expectation(description: "add async increased int")
         var result: Int?
         let source = Observable.just(0)
         
@@ -42,9 +42,9 @@ class ObservableDoNotationTests: BaseTestsCase {
         XCTAssertEqual(result, 2)
     }
     
-    func testObservableDoNotation_flattenExpressionFail() {
+    func testObservableDoNotation_erorrWhenAddAsyncIncreasedInts() {
         // given
-        let expect = expectation(description: "should fail from flattened expression")
+        let expect = expectation(description: "should fail add async increased int")
         var error: Error?
         let source = Observable.just(0)
         
@@ -68,7 +68,7 @@ class ObservableDoNotationTests: BaseTestsCase {
         XCTAssertEqual(error is TestError, true)
     }
     
-    func testObservableDoNotation_cancelFlattenExpression() {
+    func testObservableDoNotation_cancel() {
         // given
         let expect = expectation(description: "should complete with cancel async task")
         var event: Event<Int>?
@@ -105,9 +105,9 @@ class SingleDoNotationTests: BaseTestsCase {
     
     struct SelfReleasedError: Error { }
     
-    func testSingleDoNotation_flattenExpression() {
+    func testSingleDoNotation_addAsyncIncreasedInts() {
         // given
-        let expect = expectation(description: "should onNext event occur from flattened expression")
+        let expect = expectation(description: "add async increased int")
         var result: Int?
         let source = Single<Int>.just(0)
         
@@ -131,9 +131,9 @@ class SingleDoNotationTests: BaseTestsCase {
         XCTAssertEqual(result, 2)
     }
     
-    func testSingleDoNotation_flattenExpressionFail() {
+    func testSingleDoNotation_erorrWhenAddAsyncIncreasedInts() {
         // given
-        let expect = expectation(description: "should fail from flattened expression")
+        let expect = expectation(description: "should fail add async increased int")
         var error: Error?
         let source = Single<Int>.just(0)
         
@@ -163,9 +163,9 @@ class SingleDoNotationTests: BaseTestsCase {
 
 class MaybeDoNotationTests: BaseTestsCase {
     
-    func testMaybeDoNotation_flattenExpression() {
+    func testMaybeDoNotation_addAsyncIncreasedInts() {
         // given
-        let expect = expectation(description: "should onNext event occur from flattened expression")
+        let expect = expectation(description: "add async increased int")
         var result: Int?
         let source = Maybe<Int>.just(0)
         
@@ -189,9 +189,9 @@ class MaybeDoNotationTests: BaseTestsCase {
         XCTAssertEqual(result, 2)
     }
     
-    func testMaybeDoNotation_flattenExpressionFail() {
+    func testMaybeDoNotation_erorrWhenAddAsyncIncreasedInts() {
         // given
-        let expect = expectation(description: "should fail from flattened expression")
+        let expect = expectation(description: "should fail add async increased int")
         var error: Error?
         let source = Maybe<Int>.just(0)
         
@@ -215,7 +215,7 @@ class MaybeDoNotationTests: BaseTestsCase {
         XCTAssertEqual(error is TestError, true)
     }
     
-    func testMaybeDoNotation_cancelFlattenExpression() {
+    func testMaybeDoNotation_cancel() {
         // given
         let expect = expectation(description: "should complete with cancel async task")
         var event: MaybeEvent<Int>?
@@ -250,9 +250,9 @@ class MaybeDoNotationTests: BaseTestsCase {
 
 class InfallibleDoNotationTests: BaseTestsCase {
     
-    func testInfallibleDoNotation_flattenExpression() {
+    func testInfallibleDoNotation_addAsyncIncreasedInts() {
         // given
-        let expect = expectation(description: "should onNext event occur from flattened expression")
+        let expect = expectation(description: "add async increased int")
         var result: Int?
         let source = Infallible<Int>.just(0)
         
@@ -280,7 +280,7 @@ class InfallibleDoNotationTests: BaseTestsCase {
         XCTAssertEqual(result, 2)
     }
     
-    func testInfallibleDoNotation_cancelFlattenExpression() {
+    func testInfallibleDoNotation_cancel() {
         // given
         let expect = expectation(description: "should complete with cancel async task")
         var event: Event<Int>?
