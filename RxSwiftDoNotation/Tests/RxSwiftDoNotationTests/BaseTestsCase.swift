@@ -34,7 +34,6 @@ class BaseTestsCase: XCTestCase {
     func increase(_ int: Int, shouldFail: Bool = false) async throws -> Int {
         
         let interval = self.sleepInterval
-        
         let operation: () async throws -> Int = {
             Thread.sleep(forTimeInterval: interval)
             if shouldFail {
