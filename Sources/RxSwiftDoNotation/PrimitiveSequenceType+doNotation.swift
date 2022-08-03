@@ -11,7 +11,7 @@ import RxSwift
 
 extension PrimitiveSequenceType where Trait == SingleTrait {
     
-    public func flatMap<T>(do expression: @escaping (Element) async throws -> T) -> Single<T> {
+    public func flatMap<T>(do expression: @Sendable @escaping (Element) async throws -> T) -> Single<T> {
         
         let runExpression: (Element) throws -> Single<T> = { element in
             
@@ -38,7 +38,7 @@ extension PrimitiveSequenceType where Trait == SingleTrait {
 
 extension PrimitiveSequenceType where Trait == MaybeTrait {
     
-    public func flatMap<T>(do expression: @escaping (Element) async throws -> T?) -> Maybe<T> {
+    public func flatMap<T>(do expression: @Sendable @escaping (Element) async throws -> T?) -> Maybe<T> {
         
         let runExpression: (Element) throws -> Maybe<T> = { element in
             

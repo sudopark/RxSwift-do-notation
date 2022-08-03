@@ -11,7 +11,7 @@ import RxSwift
 
 extension InfallibleType {
     
-    public func flatMap<T>(do expression: @escaping (Element) async -> T?) -> Infallible<T> {
+    public func flatMap<T>(do expression: @Sendable @escaping (Element) async -> T?) -> Infallible<T> {
         
         let runExpression: (Element) -> Infallible<T> = { element in
             

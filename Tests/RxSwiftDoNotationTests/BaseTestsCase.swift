@@ -12,7 +12,7 @@ import RxSwift
 import RxSwiftDoNotation
 
 
-class BaseTestsCase: XCTestCase {
+class BaseTestsCase: XCTestCase, @unchecked Sendable {
     
     struct TestError: Error { }
     
@@ -36,7 +36,8 @@ class BaseTestsCase: XCTestCase {
         let interval = self.sleepInterval
         
         let operation: () async throws -> Int = {
-            Thread.sleep(forTimeInterval: interval)
+            let interval = UInt64(interval * 1000) * 1000 * 1000
+            try await Task.sleep(nanoseconds: interval)
             if shouldFail {
                 throw TestError()
             } else {

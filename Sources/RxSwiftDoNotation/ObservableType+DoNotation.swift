@@ -11,7 +11,7 @@ import RxSwift
 
 extension ObservableType {
     
-    public func flatMap<T>(do expression: @escaping (Element) async throws -> T?) -> Observable<T> {
+    public func flatMap<T>(do expression: @Sendable @escaping (Element) async throws -> T?) -> Observable<T> {
         
         let runExpression: (Element) throws -> Observable<T> = { element in
             
