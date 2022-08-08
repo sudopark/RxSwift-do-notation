@@ -30,4 +30,10 @@ extension InfallibleType {
         
         return self.flatMap(runExpression)
     }
+    
+    public static func create<T>(do expression: @Sendable @escaping () async -> T?) -> Infallible<T> {
+        
+        return Infallible.just(())
+            .flatMap(do: expression)
+    }
 }

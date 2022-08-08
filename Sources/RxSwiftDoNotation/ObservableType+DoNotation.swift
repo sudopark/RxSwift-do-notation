@@ -36,5 +36,11 @@ extension ObservableType {
         
         return self.flatMap(runExpression)
     }
+    
+    public static func create<T>(do expression: @Sendable @escaping () async throws -> T?) -> Observable<T> {
+        
+        return Observable.just(())
+            .flatMap(do: expression)
+    }
 }
 

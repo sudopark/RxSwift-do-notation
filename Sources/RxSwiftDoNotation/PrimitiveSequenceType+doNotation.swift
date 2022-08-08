@@ -33,6 +33,12 @@ extension PrimitiveSequenceType where Trait == SingleTrait {
         
         return self.flatMap(runExpression)
     }
+    
+    public static func create<T>(do expression: @Sendable @escaping () async throws -> T) -> Single<T> {
+        
+        return Single.just(())
+            .flatMap(do: expression)
+    }
 }
 
 
@@ -63,5 +69,10 @@ extension PrimitiveSequenceType where Trait == MaybeTrait {
         }
         
         return self.flatMap(runExpression)
+    }
+    
+    public static func create<T>(do expression: @Sendable @escaping () async throws -> T?) -> Maybe<T> {
+        return Maybe.just(())
+            .flatMap(do: expression)
     }
 }
