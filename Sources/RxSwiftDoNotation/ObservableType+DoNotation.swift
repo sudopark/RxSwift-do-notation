@@ -14,24 +14,7 @@ extension ObservableType {
     public func flatMap<T>(do expression: @Sendable @escaping (Element) async throws -> T?) -> Observable<T> {
         
         let runExpression: (Element) throws -> Observable<T> = { element in
-            
-            return Observable.create { observer in
-                
-                
-                let task = Task {
-                    do {
-                        if let result = try await expression(element) {
-                            observer.onNext(result)
-                        }
-                        observer.onCompleted()
-                            
-                    } catch {
-                        observer.onError(error)
-                    }
-                }
-                
-                return Disposables.create { task.cancel() }
-            }
+            return Observable<T>.create(with: element, do: expression)
         }
         
         return self.flatMap(runExpression)
@@ -39,8 +22,30 @@ extension ObservableType {
     
     public static func create<T>(do expression: @Sendable @escaping () async throws -> T?) -> Observable<T> {
         
-        return Observable.just(())
-            .flatMap(do: expression)
+        return Observable<T>.create(with: (), do: expression)
+    }
+    
+    
+    private static func create<I, R>(
+        with input: I,
+        do expression: @Sendable @escaping (I) async throws -> R?
+    ) -> Observable<R> {
+        return Observable.create { observer in
+
+            let task = Task {
+                do {
+                    if let result = try await expression(input) {
+                        observer.onNext(result)
+                    }
+                    observer.onCompleted()
+                        
+                } catch {
+                    observer.onError(error)
+                }
+            }
+            
+            return Disposables.create { task.cancel() }
+        }
     }
 }
 
